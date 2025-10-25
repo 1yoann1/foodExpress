@@ -4,6 +4,7 @@ import { User } from "../models/User.js";
 import { userExists } from "../middleware/userExists.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
+import { validateUser } from "../middleware/validateUser.js";
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.get("/:id", verifyToken, async (request, response) => {
   response.status(200).json(user);
 });
 
-router.put("/:id", verifyToken, userExists, async (request, response) => {
+router.put("/:id", verifyToken, userExists, validateUser, async (request, response) => {
   if (request.user.role !== "admin" && request.user.id !== request.params.id) {
     return response.status(403).json({message: "Access denied"});
   }

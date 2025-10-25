@@ -3,10 +3,11 @@ import express from "express";
 import { User } from "../config/mongo.js";
 import bcrypt from "bcrypt";
 import { use } from "react";
+import { validateUser } from "../middleware/validateUser.js";
 
 const router = express.Router();
 
-router.post('/register', async (request, response) => {
+router.post('/register', validateUser, async (request, response) => {
     try {
         const emailVerif = await User.findOne({email : request.body.email});
         if (emailVerif) {
