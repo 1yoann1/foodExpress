@@ -3,7 +3,7 @@ import express, { request } from "express";
 import { User } from "../models/User.js";
 import { userExists } from "../middleware/userExists.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
+import { verifyRole } from "../middleware/roleMiddleware.js";
 import { validateUser } from "../middleware/validateUser.js";
 
 const router = express.Router();

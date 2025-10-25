@@ -1,4 +1,4 @@
-import {User} from "../config/mongo.js";
+import {User} from "../models/User.js";
 
 export const userExists = async (req, res, next) => {
     try {

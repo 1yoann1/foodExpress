@@ -1,6 +1,6 @@
 import express, { request } from "express";
 
-import { Menu } from "../config/mongo.js";
+import { Menu } from "../models/Menus.js";
 import { userExists } from "../middleware/userExists.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 import { isAdmin } from "../middleware/authMiddleware.js";
@@ -20,7 +20,7 @@ router.get("/", async (request, response) => {
     .sort(sortOption)
     .skip(skip)
     .limit(limit)
-    populate("restaurant_id", "name");
+    .populate("restaurant_id", "name");
     response.json(menus);
   } catch (err) {
     response.status(500).json({message: "error"});
@@ -35,8 +35,9 @@ router.get("/:id", async (request, response) => {
     }
     response.json(menu);
    } catch (err) {
-    response.status(500).json({message : err.message});
-   }
+    console.error("Erreur menus:", err.message);
+    response.status(500).json({ message: err.message });
+  }
 });
 
 router.post("/", verifyToken, isAdmin, validateMenu, async (request, response) => {
@@ -45,7 +46,8 @@ router.post("/", verifyToken, isAdmin, validateMenu, async (request, response) =
     await menu.save();
     response.status(201).json(menu);
   } catch (err) {
-    response.status(400).json({message: err.message});
+    console.error("Erreur menus:", err.message);
+    response.status(500).json({ message: err.message });
   }
 });
 

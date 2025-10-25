@@ -1,8 +1,7 @@
 import express from "express";
 
-import { User } from "../config/mongo.js";
-import bcrypt from "bcrypt";
-import { use } from "react";
+import { User } from "../models/User.js";
+import bcrypt from "bcryptjs";
 import { validateUser } from "../middleware/validateUser.js";
 
 const router = express.Router();
@@ -20,9 +19,10 @@ router.post('/register', validateUser, async (request, response) => {
             message: `Bienvenue ${saveUser.username}, ton compte a été créé avec succès. Tu peux te connecter !`, 
             id: saveUser._id 
         });
-    } catch (error) {
-        response.status(500).json({error: "erreur lors de l'authentification de l'utilisateur"});
-    };
+    } catch (err) {
+        console.error("Erreur register:", err.message);
+        response.status(500).json({ error: err.message });
+    }
 });
 
 router.post('/login', async (request, response) => {

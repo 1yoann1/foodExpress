@@ -4,7 +4,8 @@ import cors from "cors";
 import restaurantRouter from "./routes/restaurants.js"
 import menusRouter from "./routes/menus.js"
 import usersRouter from "./routes/users.js";
-import registerRouter from "./routers/register.js"
+import registerRouter from "./routes/register.js"
+import connectDB from "./config/mongo.js";
 
 dotenv.config();
 connectDB();
@@ -14,7 +15,7 @@ app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/auth", registerRouter);
-app.use("/restaurant", restaurantRouter);
+app.use("/restaurants", restaurantRouter);
 app.use("/menus", menusRouter);
 
 export default app;
