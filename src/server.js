@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/auth", registerRouter);
-app.use("restaurant", restaurantRouter);
-app.use("menus", menusRouter);
+app.use("/restaurant", restaurantRouter);
+app.use("/menus", menusRouter);
 
 export default app;
