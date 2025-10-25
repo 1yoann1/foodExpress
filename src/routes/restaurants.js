@@ -3,6 +3,7 @@ import express, { request } from "express";
 import { Restaurant } from "../models/Restaurant.js";
 import { userExists } from "../middleware/userExists.js";
 import { isAdmin, verifyToken } from "../middleware/authMiddleware.js";
+import { validateRestaurant } from "../middleware/validateRestaurant.js";
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-router.post("/:id", verifyToken, isAdmin, async (request, response) => {
+router.post("/:id", verifyToken, isAdmin, validateRestaurant, async (request, response) => {
   try {
     const {name, address, phone, opening_hours} = request.body;
     const newRestaurant = new Restaurant({
@@ -53,7 +54,7 @@ router.post("/:id", verifyToken, isAdmin, async (request, response) => {
   }
 });
 
-router.put("/:id", verifyToken, isAdmin, async (request, response) => {
+router.put("/:id", verifyToken, isAdmin, validateRestaurant, async (request, response) => {
   try {
     const updateRestaurant = await Restaurant.findByIdAndUpdate(
       request.params.id,

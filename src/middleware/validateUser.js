@@ -12,4 +12,5 @@ export const validateUser = (request, response, next) => {
     if (error) {
         return response.status(400).json({message: error.details[0].message});
     }
+    next();
 }

@@ -4,6 +4,7 @@ import { Menu } from "../config/mongo.js";
 import { userExists } from "../middleware/userExists.js";
 import { verifyToken } from "../middleware/authMiddleware.js";
 import { isAdmin } from "../middleware/authMiddleware.js";
+import { validateMenu } from "../middleware/validateMenu.js";
 
 const router = express.Router();
 
@@ -38,7 +39,7 @@ router.get("/:id", async (request, response) => {
    }
 });
 
-router.post("/", verifyToken, isAdmin, async (request, response) => {
+router.post("/", verifyToken, isAdmin, validateMenu, async (request, response) => {
   try {
     const menu = new Menu(request.body);
     await menu.save();
@@ -48,7 +49,7 @@ router.post("/", verifyToken, isAdmin, async (request, response) => {
   }
 });
 
-router.put("/:id", verifyToken, isAdmin, async (request, response) => {
+router.put("/:id", verifyToken, isAdmin, validateMenu, async (request, response) => {
   try {
     const updated = await Menu.findByIdAndUpdate(request.params.id, request.body, {new: true});
     if (!updated) {
