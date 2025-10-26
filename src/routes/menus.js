@@ -1,3 +1,45 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Menu:
+ *       type: object
+ *       required:
+ *         - name
+ *         - price
+ *         - restaurantId
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: ID auto-généré du menu
+ *         name:
+ *           type: string
+ *           description: Nom du plat
+ *         price:
+ *           type: number
+ *           description: Prix du plat
+ *         restaurantId:
+ *           type: string
+ *           description: Référence au restaurant associé
+ */
+
+/**
+ * @swagger
+ * /menus:
+ *   get:
+ *     summary: Récupère la liste de tous les menus
+ *     tags: [Menus]
+ *     responses:
+ *       200:
+ *         description: Liste de tous les menus
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Menu'
+ */
+
 import express, { request } from "express";
 
 import { Menu } from "../models/Menus.js";

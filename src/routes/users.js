@@ -1,3 +1,42 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *       properties:
+ *         id:
+ *           type: string
+ *         username:
+ *           type: string
+ *         email:
+ *           type: string
+ *         role:
+ *           type: string
+ *           enum: [user, admin]
+ */
+
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Récupère la liste des utilisateurs
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Liste de tous les utilisateurs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
+ */
+
 import express, { request } from "express";
 
 import { User } from "../models/User.js";

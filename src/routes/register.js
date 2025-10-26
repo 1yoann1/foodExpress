@@ -1,3 +1,84 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentification des utilisateurs
+ */
+
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Inscription d’un nouvel utilisateur
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserRegister'
+ *     responses:
+ *       201:
+ *         description: Utilisateur créé avec succès
+ *       400:
+ *         description: Erreur de validation ou email déjà utilisé
+ *
+ * /auth/login:
+ *   post:
+ *     summary: Connexion d’un utilisateur existant
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UserLogin'
+ *     responses:
+ *       200:
+ *         description: Connexion réussie, renvoie un token JWT
+ *       401:
+ *         description: Identifiants invalides
+ *
+ * components:
+ *   schemas:
+ *     UserRegister:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - password
+ *       properties:
+ *         username:
+ *           type: string
+ *           description: Nom d'utilisateur
+ *         email:
+ *           type: string
+ *           description: Adresse email
+ *         password:
+ *           type: string
+ *           description: Mot de passe
+ *       example:
+ *         username: Yoann
+ *         email: yoann@example.com
+ *         password: azerty123
+ *
+ *     UserLogin:
+ *       type: object
+ *       required:
+ *         - email
+ *         - password
+ *       properties:
+ *         email:
+ *           type: string
+ *           description: Adresse email
+ *         password:
+ *           type: string
+ *           description: Mot de passe
+ *       example:
+ *         email: yoann@example.com
+ *         password: azerty123
+ */
+
 import express from "express";
 
 import { User } from "../models/User.js";

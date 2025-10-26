@@ -1,3 +1,71 @@
+/**
+ * @swagger
+ * /restaurants:
+ *   get:
+ *     summary: Récupère la liste des restaurants
+ *     tags: [Restaurants]
+ *     parameters:
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         description: Numéro de la page
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Nombre de résultats par page
+ *     responses:
+ *       200:
+ *         description: Liste paginée des restaurants
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 total:
+ *                   type: integer
+ *                 page:
+ *                   type: integer
+ *                 totalPages:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Restaurant'
+ */
+
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Restaurant:
+ *       type: object
+ *       required:
+ *         - name
+ *         - address
+ *         - phone
+ *         - opening_hours
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: ID auto-généré du restaurant
+ *         name:
+ *           type: string
+ *           description: Nom du restaurant
+ *         address:
+ *           type: string
+ *         phone:
+ *           type: string
+ *         opening_hours:
+ *           type: string
+ *       example:
+ *         name: "Espace Aurore"
+ *         address: "23 Rue au Curé"
+ *         phone: "01539451100"
+ *         opening_hours: "9h-22h"
+ */
+
 import express, { request } from "express";
 
 import { Restaurant } from "../models/Restaurant.js";
