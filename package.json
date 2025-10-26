@@ -27,10 +27,6 @@
     "nodemon": "^3.1.10",
     "supertest": "^7.1.4"
   },
-  "jest": {
-    "testEnvironment": "node",
-    "transform": {}
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/1yoann1/foodExpress.git"
